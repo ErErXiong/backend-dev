@@ -68,7 +68,21 @@ codex plugin add backend-dev@personal
 
 ## 环境变量
 
-`skill-curator-tbs` 会自动适配不同电脑。需要覆盖默认路径时使用环境变量或脚本参数：
+默认不需要手动配置环境变量。`skill-curator-tbs` 会按当前电脑自动使用常见路径；只有当你的 Codex 目录、插件源目录、手册输出位置或 marketplace 不在默认位置时，才需要覆盖。
+
+推荐让 AI 代你检查和配置。新机器安装后，可以直接对 Codex 说：
+
+```text
+请帮我配置 backend-dev 插件的跨机器环境：
+1. 检查 CODEX_HOME、SKILL_CURATOR_MANUAL、SKILL_CURATOR_LOCAL_PLUGINS、SKILL_CURATOR_MARKETPLACE 当前是否需要设置。
+2. 如果默认路径已经可用，不要设置多余环境变量。
+3. 如果某个路径和默认值不一致，请用当前操作系统的用户级环境变量方式设置，并说明设置了什么。
+4. 检查 personal marketplace 是否存在，确认 backend-dev 指向 .agents/plugins/backend-dev。
+5. 运行 backend-dev:skill-curator-tbs 的盘点脚本验证配置。
+6. 刷新插件安装，并提醒我新开一个 Codex 任务测试。
+```
+
+AI 配置时应优先“先检查，后设置”：不要为了整齐而写入不必要的环境变量。需要覆盖默认路径时，使用以下变量或脚本参数：
 
 | 变量 | 作用 |
 | --- | --- |
