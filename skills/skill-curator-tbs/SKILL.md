@@ -20,7 +20,7 @@ description: 整理、优化和维护当前 Codex 技能与插件的工作流。
 脚本会自动识别当前用户环境，不绑定某一台机器：
 
 - Codex 目录：优先读 `CODEX_HOME`，否则使用 `~/.codex`。
-- 手册路径：优先读 `SKILL_CURATOR_MANUAL`，否则使用 `~/Desktop/codex-skill-usage-manual.md`。
+- 手册路径：优先读 `SKILL_CURATOR_MANUAL`，否则固定生成到 `~/Desktop/codex-skill-usage-manual.md`；桌面目录不存在时由脚本创建。
 - 本地插件源：优先读 `SKILL_CURATOR_LOCAL_PLUGINS`，否则使用 `~/plugins`。
 - Personal marketplace：优先读 `SKILL_CURATOR_MARKETPLACE`，否则使用 `~/.agents/plugins/marketplace.json`。
 
@@ -95,7 +95,7 @@ python "<this-skill>\scripts\skill_inventory_manual.py" --codex-home "$env:CODEX
 
 手册必须覆盖以下内容：
 
-- 快速选择表，放在手册前部。
+- 快速选择表，放在手册前部，并按需求与讨论、开发交付、测试验证、评审复盘、技能维护等分组。
 - 推荐组合流程。
 - 当前状态。
 - 后续插件安装后的维护规则。

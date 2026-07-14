@@ -21,10 +21,7 @@ def default_manual_path() -> Path:
     env_path = os.environ.get("SKILL_CURATOR_MANUAL")
     if env_path:
         return Path(env_path).expanduser()
-    desktop = user_home() / "Desktop"
-    if desktop.exists():
-        return desktop / "codex-skill-usage-manual.md"
-    return user_home() / "codex-skill-usage-manual.md"
+    return user_home() / "Desktop" / "codex-skill-usage-manual.md"
 
 
 def default_local_plugins() -> Path:
@@ -213,24 +210,61 @@ def table(rows: list[tuple[str, str, str]]) -> str:
     return "\n".join(lines)
 
 
-def main_skill_rows() -> list[tuple[str, str, str]]:
+def main_skill_groups() -> list[tuple[str, list[tuple[str, str, str]]]]:
     return [
-        ("禅道或指定网站 BUG", "zentao-bug-fix", "给 BUG ID、链接或问题描述；让 Codex 读取票据、定位代码、验证、提交；推送前必须再确认。"),
-        ("普通 BUG 修复", "backend-dev:backend-router", "后端维护默认入口；它会判断走短流程、完整流程还是专项技能。"),
-        ("难定位 BUG", "matt-skills-zh-tbs:diagnosing-bugs", "先复现、缩小范围、建立红色反馈，再进入修复。"),
-        ("自动化修改 BUG", "backend-dev:backend-router", "问题明确时直接修；原因不清时先切到 diagnosing-bugs。"),
-        ("开发新功能", "backend-dev:backend-router", "需求清楚且偏后端时使用；跨模块或高风险需求转 delivery-lifecycle。"),
-        ("新需求交付", "backend-dev:delivery-lifecycle", "适合新模块、权限、数据库迁移、发布准备等完整生命周期。"),
-        ("创意探索/需求发散", "brainstorming", "用于功能、组件、行为改动前的早期探索；它更像辅助入口，不是交付主流程。"),
-        ("简单需求细化", "matt-skills-zh-tbs:grill-me", "没有代码库上下文时，用连续追问把想法变成可执行方向。"),
-        ("代码库内需求澄清", "matt-skills-zh-tbs:grill-with-docs", "有代码库时使用，边追问边沉淀 CONTEXT、术语和 ADR。"),
-        ("整理成规格", "matt-skills-zh-tbs:to-spec", "已经讨论得差不多时，把上下文整理成 spec/PRD。"),
-        ("拆成任务", "matt-skills-zh-tbs:to-tickets", "把规格拆成可逐步实现、可验证的 ticket。"),
-        ("自动化测试", "matt-skills-zh-tbs:tdd", "需要 test-first、先复现再修、补集成测试时使用。"),
-        ("代码评审", "matt-skills-zh-tbs:code-review", "按固定基点检查规范符合度和需求实现度。"),
-        ("优化技能库", "skill-curator-tbs", "盘点、简化入口、发现重复或缓存残留、更新本手册。"),
-        ("发现技能/插件", "matt-skills-zh-tbs:find-skills", "想找更好的技能、插件或工作流时使用。"),
+        (
+            "需求与讨论",
+            [
+                ("创意探索/需求发散", "brainstorming", "用于功能、组件、行为改动前的早期探索。"),
+                ("简单需求细化", "grill-me", "没有代码库上下文时，用连续追问把想法变成可执行方向。"),
+                ("代码库内需求澄清", "grill-with-docs", "有代码库时使用，边追问边沉淀 CONTEXT、术语和 ADR。"),
+                ("整理成规格", "to-spec", "已经讨论得差不多时，把上下文整理成 spec/PRD。"),
+                ("拆成任务", "to-tickets", "把规格拆成可逐步实现、可验证的 ticket。"),
+            ],
+        ),
+        (
+            "开发交付",
+            [
+                ("后端日常入口", "backend-dev:backend-router", "默认从这里开始；自动判断短流程、完整流程或专项技能。"),
+                ("小范围后端改动", "backend-dev:backend-flow", "需求清楚的接口、校验、配置、导入导出或小 Bug。"),
+                ("新模块/高风险交付", "backend-dev:delivery-lifecycle", "适合跨服务、权限、数据库迁移、发布准备等完整生命周期。"),
+                ("禅道或指定网站 BUG", "zentao-bug-fix", "给 BUG ID、链接或问题描述；推送前必须再确认。"),
+                ("普通 BUG 修复", "bugfix-workflow", "先复现或收集证据，再做最小修复。"),
+            ],
+        ),
+        (
+            "测试与验证",
+            [
+                ("测试驱动开发", "test-driven-development", "需要 test-first、先复现再修、补集成测试时使用。"),
+                ("浏览器页面验收", "backend-dev:browser-qa", "新增功能或修复 Bug 后，有页面路径时验证真实请求和刷新结果。"),
+                ("Playwright 自动化", "playwright", "需要直接编写或运行浏览器自动化脚本时使用。"),
+                ("完成前验证", "verification-before-completion", "结束前核对 fresh 验证输出，避免未验证即完成。"),
+            ],
+        ),
+        (
+            "评审与复盘",
+            [
+                ("代码评审", "code-review / receiving-code-review", "按固定基点检查风险、回归和需求实现度。"),
+                ("经验复盘", "backend-dev:backend-retro", "实质性后端改动完成后，提炼可确认经验候选。"),
+                ("发布分支收尾", "finishing-a-development-branch", "提交、推送、PR 或分支收尾前使用。"),
+            ],
+        ),
+        (
+            "技能与插件维护",
+            [
+                ("整理 Codex 技能", "backend-dev:skill-curator-tbs", "盘点、简化入口、发现重复或缓存残留、更新本手册。"),
+                ("发现技能/插件", "find-skills", "想找更好的技能、插件或工作流时使用。"),
+                ("编写新技能", "writing-skills", "把稳定流程沉淀成可复用技能时使用。"),
+            ],
+        ),
     ]
+
+
+def quick_selection() -> str:
+    sections: list[str] = []
+    for title, rows in main_skill_groups():
+        sections.append(f"### {title}\n\n{table(rows)}")
+    return "\n\n".join(sections)
 
 
 def generate_manual(inv: dict[str, object]) -> str:
@@ -262,7 +296,7 @@ def generate_manual(inv: dict[str, object]) -> str:
 
 ## 快速选择
 
-{table(main_skill_rows())}
+{quick_selection()}
 
 ## 推荐工作流
 

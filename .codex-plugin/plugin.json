@@ -1,6 +1,6 @@
 {
   "name": "backend-dev",
-  "version": "0.2.0+codex.20260714014851",
+  "version": "0.2.0+codex.20260714031613",
   "description": "\u9762\u5411\u65e5\u5e38\u540e\u7aef\u7814\u53d1\u7684\u4efb\u52a1\u8def\u7531\u3001\u4ea4\u4ed8\u6d41\u7a0b\u3001\u6d4f\u89c8\u5668 QA\u3001\u6280\u80fd\u6574\u7406\u4e0e\u786e\u8ba4\u5f0f\u7ecf\u9a8c\u6c89\u6dc0\u63d2\u4ef6\u3002",
   "author": {
     "name": "tbs"
