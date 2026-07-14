@@ -1,0 +1,12 @@
+__pycache__/
+*.py[cod]
+.cache/
+.cache*/
+output/
+outputs/
+tmp/
+.temp/
+*.log
+.DS_Store
+Thumbs.db
+.codex/plugins/cache/

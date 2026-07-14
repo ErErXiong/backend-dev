@@ -1,0 +1,4 @@
+interface:
+  display_name: "完整研发交付"
+  short_description: "为高风险需求提供从方案审查到发布验证的完整研发交付流程。"
+  default_prompt: "按完整研发流程处理当前需求。"

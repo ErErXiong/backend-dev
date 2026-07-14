@@ -1,0 +1,4 @@
+interface:
+  display_name: "浏览器 QA @tbs"
+  short_description: "用真实浏览器验证新增功能或修复后的页面路径。"
+  default_prompt: "Use $browser-qa to 验证刚完成的后端改动在浏览器页面上的真实效果。"

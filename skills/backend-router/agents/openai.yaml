@@ -1,0 +1,4 @@
+interface:
+  display_name: "后端任务路由"
+  short_description: "识别后端任务类型并依据风险选择恰当且安全的研发执行流程。"
+  default_prompt: "识别这个后端任务的类型并按合适流程处理。"

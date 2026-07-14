@@ -1,0 +1,4 @@
+interface:
+  display_name: "技能整理 @tbs"
+  short_description: "整理、优化已安装技能，并维护中文技能使用手册。"
+  default_prompt: "Use $skill-curator-tbs to 整理我当前安装的技能，并更新中文使用手册。"

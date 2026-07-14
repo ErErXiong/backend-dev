@@ -1,0 +1,4 @@
+interface:
+  display_name: "日常后端开发"
+  short_description: "按短流程完成后端改动、本地验证和 Git 范围检查。"
+  default_prompt: "按日常后端开发流程处理当前任务。"
